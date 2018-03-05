@@ -1,0 +1,80 @@
+<div class="col-lg-10 col-md-10 col-sm-10">
+     <!-- form input -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          จัดการเมนู
+        </div>
+        <div class="panel-body">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+                <button type="button" class="btn btn-success " *ngIf="button=='add'" (click)="save(menu)" >เพิ่มข้อมูล</button>
+                <button type="button" class="btn btn-warning " *ngIf="button=='edit'" (click)="update(menu)">แก้ไขข้อมูล</button>
+                <button type="button" class="btn btn-info" (click)="clear()" >รีเซ็ต</button>
+            </div>
+            <div class="clearfix"></div>
+            <br>
+
+            <div class="form-group col-lg-4">
+                <label >ชื่อ</label>
+                <input type="text" class="form-control" [(ngModel)]="menu.name" placeholder="Name" aria-describedby="sizing-addon2">
+            </div>
+            <div class="form-group col-lg-4">
+                <label >เพจ</label>
+                <input type="text" class="form-control" [(ngModel)]="menu.page" placeholder="Page" aria-describedby="sizing-addon2">
+            </div>
+            <div class="form-group col-lg-4">
+                <label >ไอคอน</label>
+                <input type="text" class="form-control" [(ngModel)]="menu.icon"  placeholder="Icon" aria-describedby="sizing-addon2">
+            </div>          
+  
+        </div>
+      </div>
+      <!-- form input -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        ตารางเมนู
+      </div>
+      <div class="panel-body">
+          <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+              <button type="button" class="btn btn-danger ">ลบข้อมูล</button>
+          </div>
+          <div class="clearfix"></div>
+          <br>
+          <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th style="width:2%;">#</th>
+                  <th style="width:20%;">ชื่อ</th>
+                  <th style="width:10%;">เพจ</th>
+                  <th style="width:5%;">ไอคอน</th>
+                  <th style="width:5%;">จัดเรียง</th>
+                  <th style="width:5%;">สถานะ</th>
+                  <th style="width:5%;">แก้ไข</th>
+                  <th style="width:5%;">ลบ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let menu of menus; let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{menu.name}}</td>
+                  <td>{{menu.page}}</td>
+                  <td><i class="{{menu.icon}}" aria-hidden="true"></i></td>
+                  <td>
+                    <select class="form-control" [(ngModel)]="menu.sort"  id="exampleSelect1">
+                        <option  *ngFor="let num of menus; let i = index" (click)="sort(menu)" >{{i+1}}</option>
+                    </select>
+                  </td>
+                  <td>
+                      <button *ngIf="menu.status==true" type="button" class="btn btn-success" (click)="changStatus(menu)">ON</button>
+                      <button *ngIf="menu.status==false" type="button" class="btn btn-dark" (click)="changStatus(menu)">OFF</button>
+                  </td>
+                  <td>
+                      <button type="button" class="btn btn-warning btn-sm" (click)="getDetail(menu)"  >แก้ไขข้อมูล</button>
+                  </td>
+                  <td><i class="fa fa-trash-o" aria-hidden="true" (click)="delete(menu)"></i></td>
+                </tr>                
+              </tbody>
+            </table>
+
+      </div>
+    </div>
+</div>
